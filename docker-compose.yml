@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: stock-ai:latest
+    environment:
+      - GIGACHAT_API_KEY=${GIGACHAT_API_KEY:-}
+      - GIGACHAT_CLIENT_ID=${GIGACHAT_CLIENT_ID:-}
+      - GIGACHAT_SCOPE=${GIGACHAT_SCOPE:-}
+      - TINKOFF_BASE_URL=${TINKOFF_BASE_URL:-}
+      - TINKOFF_API_TOKEN=${TINKOFF_API_TOKEN:-}
+    ports:
+      - "8000:8000"
+    volumes:
+      - log-data:/app/log
+    restart: unless-stopped
+
+volumes:
+  log-data:
+
